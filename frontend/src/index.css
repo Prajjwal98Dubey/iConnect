@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@200&family=Playfair+Display:ital@1&family=Rubik:wght@300&display=swap');
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+/* .home{
+  background-color: rgb(13, 176, 103);
+  width: 100%;
+  height: 100%;
+} */
+.home1{
+  background-color: rgb(13, 176, 103);
+  width: 100%;
+  height:600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 100px;
+  position: relative;
+  padding-bottom: 100px;
+  font-weight: bold;
+}
+.home1-child{
+  position: absolute;
+  font-size: 30px;
+  top: 320px;
+  font-family: 'Bebas Neue', sans-serif;
+  /* font-family: 'Inter', sans-serif;
+  font-family: 'Playfair Display', serif; */
+font-family: 'Rubik', sans-serif; 
+}
+.home1-child2{
+  position: absolute;
+  top:400px;
+  font-size: 20px;
+  width: fit-content;
+  height: fit-content;
+}
+.btn{
+  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Rubik', sans-serif; 
+  width: 220px;
+  height: 50px;
+  border-radius: 10px;
+  color:black;
+  border:2px solid rgb(22, 154, 95);
+  font-weight: bold;
+  box-shadow: 7px 7px black ;
+  background-color: rgb(16, 128, 78);
+}
+/* rgb(108, 207, 108) */
+.btn:hover{
+  color:whitesmoke;
+  /* border:2px solid rgb(51, 235, 97); */
+  /* background-color: green; */
+  box-shadow: 10px 10px black;
+}
