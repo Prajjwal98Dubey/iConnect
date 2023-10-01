@@ -64,3 +64,12 @@ font-family: 'Rubik', sans-serif;
   /* background-color: green; */
   box-shadow: 10px 10px black;
 }
+
+.chatpage{
+  display: flex;
+  justify-content: space-between;
+}
+.chatarea{
+  display: flex;
+  justify-content:space-around;
+}

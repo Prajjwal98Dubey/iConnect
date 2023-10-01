@@ -5,6 +5,7 @@ import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
 import { VStack } from "@chakra-ui/layout";
 import { useToast } from "@chakra-ui/react";
 import axios from 'axios';
+import  {useNavigate} from "react-router-dom"
 
 const Login = () => {
   const [email, setEmail] = useState("")
@@ -12,6 +13,7 @@ const Login = () => {
   const [show, setShow] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const toast = useToast()
+  const navigate= useNavigate()
   const handleShow = () => {
     setShow(!show)
   }
@@ -28,7 +30,6 @@ const Login = () => {
       return
     }
     try{
-
       const { data } = await axios.post("http://localhost:5000/api/users/login", {
       email, password
     },
@@ -44,6 +45,8 @@ const Login = () => {
         isClosable: true,
       })
       setIsLoading(false)
+      localStorage.setItem('userInfo',JSON.stringify(data))
+      navigate('/chats')
     }
     catch(error){
       toast({

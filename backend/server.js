@@ -4,7 +4,7 @@ const chats = require('./data')
 const cors = require('cors')
 const connectDB = require('./config/db')
 const userRoutes = require('./routes/userRoutes')
-
+const chatRoutes = require('./routes/chatRoutes')
 dotenv.config()
 const app = express()
 app.use(cors())
@@ -15,6 +15,6 @@ app.get('/',(req,res)=>{
 })
 
 app.use('/api/users',userRoutes)
-// app.user('/api/chats',chatRoutes)
+app.use('/api/chats',chatRoutes)
 PORT=process.env.PORT || 5000
 app.listen(PORT,console.log(`server started at ${PORT}`))

@@ -57,6 +57,7 @@ const SignUp = () => {
                 duration: 9000,
                 isClosable: true,
             })
+            localStorage.setItem('userInfo',JSON.stringify(data))
             navigate('/chats')
         }
         catch(error){
