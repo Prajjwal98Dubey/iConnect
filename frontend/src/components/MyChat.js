@@ -10,7 +10,7 @@ import { Button } from '@chakra-ui/react';
 import { getSender } from './config/chatAlgo';
 import GroupChatModal from './GroupChatModal';
 
-const MyChat = () => { 
+const MyChat = ({fetchAgain}) => { 
     const[loggedUser,setLoggedUser]=useState("")
     const toast = useToast()
     const{user ,selectedChats,setSelectedChats,chats,setChats} = ChatState()
@@ -38,10 +38,10 @@ const MyChat = () => {
     useEffect(()=>{
         setLoggedUser(JSON.parse(localStorage.getItem("userInfo")))
         fetchChats()
-    },[])
+    },[fetchAgain])
   return (
-    <div className='mychat'>
-    <Box
+    <>
+    <Box className='mychat'
       d={{ base: selectedChats ? "none" : "flex", md: "flex" }}
       flexDir="column"
       alignItems="center"
@@ -120,7 +120,7 @@ const MyChat = () => {
       </Box>
     </Box>
 
-    </div>
+    </>
   )
 }
 

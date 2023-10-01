@@ -122,17 +122,19 @@ return(
             borderWidth="5px"
         >
             <div className="chatpage">
+                <div className="searchuser">
                 <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
                     <Button variant="ghost" onClick={onOpen} >
                         <i className="fas fa-search"></i>
                         <Text d={{ base: "none", md: "flex" }} px={4}>
-                            Search User
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                         </Text>
                     </Button>
                 </Tooltip>
-                <Text fontSize="2xl" fontFamily="Work sans">
+                </div>
+                {/* <Text fontSize="2xl" fontFamily="Work sans">
                     Talk-A-Tive
-                </Text>
+                </Text> */}
                 <div>
                     <Menu>
                         <MenuButton p={1}>

@@ -69,7 +69,29 @@ font-family: 'Rubik', sans-serif;
   display: flex;
   justify-content: space-between;
 }
-.chatarea{
+.searchuser{
+  display: flex;
+  justify-content: center;
+  /* background-color: blue; */
+  width: 1100px;
+}
+/* .chatarea{
   display: flex;
   justify-content:space-around;
+} */
+.mychat{
+  width: 1px/3px;
+  height: fit-content;
+}
+.chatArea{
+  display: flex;
+}
+.chatSpace{
+  display: flex;
+  justify-content: center;
+}
+.chatSection{
+  margin: 2px;
+  width: fit-content;
+  /* height: fit-content; */
 }

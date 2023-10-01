@@ -7,13 +7,16 @@ import ChatSection from './ChatSection'
 import { Box } from '@chakra-ui/react'
 const ChatPage = () => {
     const {user}=ChatState()
+    const[fetchAgain,setFetchAgain]=useState(false)
     
     return (
         <div style={{width:"100%"}}>
          {user && <SideBar/>}
          <Box  d="flex" justifyContent="space-between" w="100%" h="91.5vh" p="10px" color="black">
-         {user && <MyChat/>}
-         {user && <ChatSection/>}
+            <div className="chatArea">
+         {user && <MyChat fetchAgain={fetchAgain}/>}
+         {user && <ChatSection fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}/>}
+         </div>
          </Box>
         </div>
         
