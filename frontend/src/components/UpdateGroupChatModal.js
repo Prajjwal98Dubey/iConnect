@@ -23,7 +23,7 @@ import UseBadge from "./UseBadge";
 import UserItem from "./UserItem";
 
 
-const UpdateGroupChatModal = ({  fetchAgain, setFetchAgain }) => {
+const UpdateGroupChatModal = ({  fetchAgain, setFetchAgain, }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [groupChatName, setGroupChatName] = useState();
   const [search, setSearch] = useState("");
@@ -32,7 +32,7 @@ const UpdateGroupChatModal = ({  fetchAgain, setFetchAgain }) => {
   const [renameloading, setRenameLoading] = useState(false);
   const toast = useToast();
 
-  const { selectedChats, setSelectedChats, user } = ChatState();
+  const { selectedChats, setSelectedChats, user,fetchMessages } = ChatState();
 
   const handleSearch = async (query) => {
     setSearch(query);
@@ -188,6 +188,7 @@ const UpdateGroupChatModal = ({  fetchAgain, setFetchAgain }) => {
 
       user1._id === user._id ? setSelectedChats() : setSelectedChats(data);
       setFetchAgain(!fetchAgain);
+      fetchMessages()
       setLoading(false);
     } catch (error) {
       toast({

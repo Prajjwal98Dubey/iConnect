@@ -10,18 +10,81 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import ProfileModal from './ProfileModal';
 import { ChatState } from '../Context/ChatProvider';
 import UpdateGroupChatModal from './UpdateGroupChatModal';
+import Scrollable from './Scrollable';
 
 
-const SingleChat = ({fetchAgain,setFetchAgain}) => {
-    const { selectedChats, setSelectedChats, user } =
+const SingleChat = ({ fetchAgain, setFetchAgain }) => {
+  const { selectedChats, setSelectedChats, user } =
     ChatState();
-    const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [newMessage, setNewMessage] = useState()
   const toast = useToast();
+ 
+  const sendMessage = async (event) => {
+    if (event.key === "Enter" && newMessage) {
+      try {
+        const config = {
+          headers: {
+            'Content-type': 'application/json',
+            authorization: `Bearer ${user.token}`
+          }
+        }
+        const { data } = await axios.post('http://localhost:5000/api/message/', {
+          content: newMessage,
+          chatId: selectedChats._id
+        }, config)
+        console.log(data)
+        setMessages([...messages, data])
+        setNewMessage("")
+      }
+      catch (error) {
+        //   toast({
+        //     title: 'Error Occured',
+        //     status: 'error',
+        //     duration: 9000,
+        //     isClosable: true,
+        //     position: "top-left"
+        // })
+        console.log("Error Occured")
+      }
 
+    }
+
+
+  }
+  const typingHandler = (event) => {
+    setNewMessage(event.target.value)
+  }
+  const fetchMessages = async () => {
+    if (!selectedChats) {
+      return
+    }
+    try {
+      const config = {
+        headers: {
+          authorization: `Bearer ${user.token}`
+        }
+      }
+      setLoading(true)
+      const { data } = await axios.get(`http://localhost:5000/api/message/${selectedChats._id}`, config)
+      setMessages(data)
+      setLoading(false)
+      console.log(messages)
+    }
+    catch (error) {
+      console.log("error occured")
+    }
+
+  }
+  useEffect(() => {
+    
+    fetchMessages()
+  }, [selectedChats])
   return (
     <>
-    {selectedChats ? (
+    {console.log(selectedChats)}
+      {selectedChats ? (
         <>
           <Text
             fontSize={{ base: "28px", md: "30px" }}
@@ -52,6 +115,7 @@ const SingleChat = ({fetchAgain,setFetchAgain}) => {
                   <UpdateGroupChatModal
                     fetchAgain={fetchAgain}
                     setFetchAgain={setFetchAgain}
+                    fetchMessages={fetchMessages}
                   />
                 </>
               ))}
@@ -76,8 +140,18 @@ const SingleChat = ({fetchAgain,setFetchAgain}) => {
                 margin="auto"
               />
             ) : (
-              <div className='chatSpace'>Mesage</div>
+              <div className='messages'><Scrollable messages={messages}/></div>
             )}
+            <FormControl onKeyDown={sendMessage} isRequired mt={2}>
+              <Input
+                variant="filled"
+                bg="gray.200"
+                placeholder="Enter a message"
+                onChange={typingHandler}
+                value={newMessage}
+              >
+              </Input>
+            </FormControl>
           </Box>
         </>
       ) : (

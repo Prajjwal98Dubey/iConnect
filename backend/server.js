@@ -5,6 +5,7 @@ const cors = require('cors')
 const connectDB = require('./config/db')
 const userRoutes = require('./routes/userRoutes')
 const chatRoutes = require('./routes/chatRoutes')
+const messageRoutes= require('./routes/messageRoutes')
 dotenv.config()
 const app = express()
 app.use(cors())
@@ -16,5 +17,15 @@ app.get('/',(req,res)=>{
 
 app.use('/api/users',userRoutes)
 app.use('/api/chats',chatRoutes)
+app.use('/api/message',messageRoutes)
 PORT=process.env.PORT || 5000
-app.listen(PORT,console.log(`server started at ${PORT}`))
+const server = app.listen(PORT,console.log(`server started at ${PORT}`))
+const io=require('socket.io')(server,{
+    pingTimeOut:60000,
+    cors:{
+        origin:"http://localhost:3000"
+    },
+})
+io.on("connection",(socket)=>{
+    console.log("connected to socket.io")
+})

@@ -19,7 +19,7 @@ import {
 import UserItem from "./UserItem";
 import UseBadge from "./UseBadge";
   
-  const GroupChatModal = ({ children }) => {
+  const GroupChatModal = ({ children  }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [groupChatName, setGroupChatName] = useState();
     const [selectedUsers, setSelectedUsers] = useState([]);

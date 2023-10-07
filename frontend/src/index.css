@@ -95,3 +95,10 @@ font-family: 'Rubik', sans-serif;
   width: fit-content;
   /* height: fit-content; */
 }
+
+.messages{
+  display:flex;
+  flex-direction: column;
+  overflow-y:scroll;
+  scrollbar-width: none;
+}
