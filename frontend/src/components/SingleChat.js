@@ -18,7 +18,7 @@ const ENDPOINT="http://localhost:5000"
 var socket,selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
-  const { selectedChats, setSelectedChats, user } =
+  const { selectedChats, setSelectedChats, user ,notification,setNotification} =
     ChatState();
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -139,7 +139,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     socket.on("message received",(newMessageRecieved)=>{
       if(!selectedChatCompare || selectedChatCompare._id!==newMessageRecieved.chat._id)
       {
-        // give notifications
+        if(!notification.includes(newMessageRecieved)){
+            setNotification([newMessageRecieved,...notification])
+            setFetchAgain(!fetchAgain)
+        }
       }
       else{
         setMessages([...messages,newMessageRecieved])

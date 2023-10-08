@@ -29,9 +29,12 @@ import { Navigate, useNavigate } from "react-router-dom";
 import ChatLoading from "./ChatLoading";
 import axios from "axios";
 import UserItem from "./UserItem";
+import { getSender } from "./config/chatAlgo";
+import NotificationBadge from 'react-notification-badge'
+import { Effect } from "react-notification-badge";
 
 const SideBar = () => {
-    const { user,setSelectedChats, chats,setChats} = ChatState()
+    const { user,setSelectedChats, chats,setChats,notification,setNotification} = ChatState()
     const [search, setSearch] = useState("")
     const [searchResult, setSearchResult] = useState([])
     const [loading, setLoading] = useState(false)
@@ -136,8 +139,24 @@ return(
                 <div>
                     <Menu>
                         <MenuButton p={1}>
+                            <NotificationBadge
+                            count={notification.length}
+                            effect={Effect.SCALE}
+                            />
                             <BellIcon fontSize="2xl" m={1} />
                         </MenuButton>
+                        <MenuList>
+                            {!notification.length&&"no new message"}
+                            {notification.map((noti)=>(
+                                <MenuItem key={noti._id} onClick={()=>
+                                {setSelectedChats(noti.chat)
+                                setNotification(notification.filter((n)=>n!==noti))
+                            }
+                                }>
+                                    {noti.chat.isGroupChat ? `New Message in  ${noti.chat.chatName}`:`New Message from ${getSender(user,noti.chat.users)}`}
+                                </MenuItem>
+                            ))}
+                            </MenuList>
                     </Menu>
                     <Menu>
                         <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
